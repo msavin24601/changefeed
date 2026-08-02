@@ -1,12 +1,16 @@
 # changefeed
 
-Daily Telegram digest of new Claude Code and Cursor releases.
+Daily Telegram digest of new Claude Code, Cursor, and GitHub releases.
 
 - Claude Code: parses the official Atom feed at
   [`feed.xml`](https://github.com/anthropics/claude-code/blob/main/feed.xml)
   in the `anthropics/claude-code` repo (one entry per release).
 - Cursor: parses the official RSS feed at
   [`cursor.com/changelog/rss.xml`](https://www.cursor.com/changelog/rss.xml).
+- GitHub: parses the official platform-wide changelog RSS feed at
+  [`github.blog/changelog/feed/`](https://github.blog/changelog/feed/). Note
+  this covers all of GitHub (Actions, Copilot, security, billing, etc.), so
+  it's noisier than the other two sources — several entries a day is normal.
 
 A small `data/state.json` file (committed back to the repo by the workflow)
 tracks the last entry seen for each source, so you're only notified about

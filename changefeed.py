@@ -17,6 +17,7 @@ CLAUDE_CODE_FEED_URL = (
     "https://raw.githubusercontent.com/anthropics/claude-code/main/feed.xml"
 )
 CURSOR_RSS_URL = "https://www.cursor.com/changelog/rss.xml"
+GITHUB_RSS_URL = "https://github.blog/changelog/feed/"
 
 ATOM_NS = {"atom": "http://www.w3.org/2005/Atom"}
 
@@ -25,9 +26,11 @@ TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 
 
 def load_state():
-    if STATE_PATH.exists():
-        return json.loads(STATE_PATH.read_text())
-    return {"claude_code": {"last_id": None}, "cursor": {"last_link": None}}
+    state = json.loads(STATE_PATH.read_text()) if STATE_PATH.exists() else {}
+    state.setdefault("claude_code", {}).setdefault("last_id", None)
+    state.setdefault("cursor", {}).setdefault("last_link", None)
+    state.setdefault("github", {}).setdefault("last_link", None)
+    return state
 
 
 def save_state(state):
@@ -56,9 +59,18 @@ def fetch_claude_code_entries():
     return entries
 
 
-def fetch_cursor_entries():
-    """Return [(title, link, description), ...] newest first, as published in the feed."""
-    resp = requests.get(CURSOR_RSS_URL, timeout=30)
+def clean_rss_description(raw):
+    text = html.unescape(raw or "")
+    text = re.sub(r"<[^>]+>", " ", text)  # strip HTML tags
+    text = re.sub(r"\s+", " ", text).strip()
+    # Strip WordPress's "The post X appeared first on Y." boilerplate (github.blog feed)
+    text = re.sub(r"\s*The post .* appeared first on .*\.$", "", text).strip()
+    return text
+
+
+def fetch_rss_entries(url):
+    """Return [(title, link, description), ...] newest first, for a standard RSS 2.0 feed."""
+    resp = requests.get(url, timeout=30)
     resp.raise_for_status()
     root = ET.fromstring(resp.content)
 
@@ -66,9 +78,17 @@ def fetch_cursor_entries():
     for item in root.findall("./channel/item"):
         title = (item.findtext("title") or "").strip()
         link = (item.findtext("link") or "").strip()
-        description = html.unescape((item.findtext("description") or "").strip())
+        description = clean_rss_description(item.findtext("description"))
         entries.append((title, link, description))
     return entries
+
+
+def fetch_cursor_entries():
+    return fetch_rss_entries(CURSOR_RSS_URL)
+
+
+def fetch_github_entries():
+    return fetch_rss_entries(GITHUB_RSS_URL)
 
 
 def new_claude_code_entries(entries, last_id):
@@ -82,7 +102,7 @@ def new_claude_code_entries(entries, last_id):
     return new
 
 
-def new_cursor_entries(entries, last_link):
+def new_rss_entries(entries, last_link):
     if last_link is None:
         return []
     new = []
@@ -116,8 +136,8 @@ def format_claude_code_message(title, link, bullets):
     return "\n".join(lines)
 
 
-def format_cursor_message(title, link, description):
-    lines = [f"<b>Cursor: {html.escape(title)}</b>"]
+def format_rss_message(source_label, title, link, description):
+    lines = [f"<b>{html.escape(source_label)}: {html.escape(title)}</b>"]
     if description:
         lines.append(html.escape(description))
     lines.append(link)
@@ -131,16 +151,20 @@ def main():
 
     claude_code_entries = fetch_claude_code_entries()
     cursor_entries = fetch_cursor_entries()
+    github_entries = fetch_github_entries()
 
     new_cc = new_claude_code_entries(claude_code_entries, state["claude_code"]["last_id"])
-    new_cursor = new_cursor_entries(cursor_entries, state["cursor"]["last_link"])
+    new_cursor = new_rss_entries(cursor_entries, state["cursor"]["last_link"])
+    new_github = new_rss_entries(github_entries, state["github"]["last_link"])
 
     messages = []
     # Send oldest-first so the digest reads chronologically
     for entry_id, title, link, bullets in reversed(new_cc):
         messages.append(format_claude_code_message(title, link, bullets))
     for title, link, description in reversed(new_cursor):
-        messages.append(format_cursor_message(title, link, description))
+        messages.append(format_rss_message("Cursor", title, link, description))
+    for title, link, description in reversed(new_github):
+        messages.append(format_rss_message("GitHub", title, link, description))
 
     if not messages:
         print("No new entries.")
@@ -158,6 +182,8 @@ def main():
         state["claude_code"]["last_id"] = claude_code_entries[0][0]
     if cursor_entries:
         state["cursor"]["last_link"] = cursor_entries[0][1]
+    if github_entries:
+        state["github"]["last_link"] = github_entries[0][1]
 
     if not dry_run:
         save_state(state)
