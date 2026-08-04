@@ -24,6 +24,9 @@ ATOM_NS = {"atom": "http://www.w3.org/2005/Atom"}
 TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID")
 
+# Telegram's hard limit is 4096 characters per message; leave headroom.
+MAX_MESSAGE_LEN = 4000
+
 
 def load_state():
     state = json.loads(STATE_PATH.read_text()) if STATE_PATH.exists() else {}
@@ -125,23 +128,61 @@ def send_telegram_message(text):
         },
         timeout=30,
     )
-    resp.raise_for_status()
+    if not resp.ok:
+        raise RuntimeError(f"Telegram API error {resp.status_code}: {resp.text}")
+
+
+def split_long_text(text, max_len):
+    """Split text into chunks <= max_len, breaking at whitespace where possible."""
+    chunks = []
+    while len(text) > max_len:
+        split_at = text.rfind(" ", 0, max_len)
+        if split_at <= 0:
+            split_at = max_len
+        chunks.append(text[:split_at])
+        text = text[split_at:].lstrip()
+    if text:
+        chunks.append(text)
+    return chunks or [""]
+
+
+def chunk_lines(header, lines, footer, max_len=MAX_MESSAGE_LEN):
+    """Group header+lines+footer into Telegram-sized messages.
+
+    The header repeats on every chunk (so each message stands alone); the
+    footer (link) is appended only to the last chunk.
+    """
+    chunks = []
+    current = [header]
+    current_len = len(header)
+    for line in lines:
+        line_len = len(line) + 1  # + newline
+        if current_len + line_len > max_len and len(current) > 1:
+            chunks.append(current)
+            current = [header]
+            current_len = len(header)
+        current.append(line)
+        current_len += line_len
+    chunks.append(current)
+    chunks[-1].append(footer)
+    return ["\n".join(c) for c in chunks]
 
 
 def format_claude_code_message(title, link, bullets):
-    lines = [f"<b>{html.escape(title)}</b>"]
+    """Return a list of Telegram-ready message chunks for one release."""
+    header = f"<b>{html.escape(title)}</b>"
+    lines = []
     for bullet in bullets:
-        lines.append(f"- {html.escape(bullet)}")
-    lines.append(link)
-    return "\n".join(lines)
+        line = f"- {html.escape(bullet)}"
+        lines.extend(split_long_text(line, MAX_MESSAGE_LEN - len(header) - 1))
+    return chunk_lines(header, lines, link)
 
 
 def format_rss_message(source_label, title, link, description):
-    lines = [f"<b>{html.escape(source_label)}: {html.escape(title)}</b>"]
-    if description:
-        lines.append(html.escape(description))
-    lines.append(link)
-    return "\n".join(lines)
+    """Return a list of Telegram-ready message chunks for one feed item."""
+    header = f"<b>{html.escape(source_label)}: {html.escape(title)}</b>"
+    lines = split_long_text(html.escape(description), MAX_MESSAGE_LEN - len(header) - 1) if description else []
+    return chunk_lines(header, lines, link)
 
 
 def main():
@@ -157,36 +198,57 @@ def main():
     new_cursor = new_rss_entries(cursor_entries, state["cursor"]["last_link"])
     new_github = new_rss_entries(github_entries, state["github"]["last_link"])
 
-    messages = []
-    # Send oldest-first so the digest reads chronologically
+    cc_messages = []
     for entry_id, title, link, bullets in reversed(new_cc):
-        messages.append(format_claude_code_message(title, link, bullets))
-    for title, link, description in reversed(new_cursor):
-        messages.append(format_rss_message("Cursor", title, link, description))
-    for title, link, description in reversed(new_github):
-        messages.append(format_rss_message("GitHub", title, link, description))
+        cc_messages.extend(format_claude_code_message(title, link, bullets))
 
-    if not messages:
+    cursor_messages = []
+    for title, link, description in reversed(new_cursor):
+        cursor_messages.extend(format_rss_message("Cursor", title, link, description))
+
+    github_messages = []
+    for title, link, description in reversed(new_github):
+        github_messages.extend(format_rss_message("GitHub", title, link, description))
+
+    # Each source is sent and checkpointed independently: a failure in one
+    # (e.g. Telegram rejects a message) doesn't block or re-send the others.
+    sources = [
+        ("claude_code", claude_code_entries, cc_messages, "last_id", lambda e: e[0]),
+        ("cursor", cursor_entries, cursor_messages, "last_link", lambda e: e[1]),
+        ("github", github_entries, github_messages, "last_link", lambda e: e[1]),
+    ]
+
+    sent_total = 0
+    had_failure = False
+    for source_key, entries, messages, state_field, id_of in sources:
+        try:
+            if dry_run:
+                for m in messages:
+                    print(m)
+                    print("---")
+            else:
+                for m in messages:
+                    send_telegram_message(m)
+                    sent_total += 1
+            if entries:
+                state[source_key][state_field] = id_of(entries[0])
+        except Exception as exc:
+            had_failure = True
+            print(f"Failed to send {source_key} digest: {exc}", file=sys.stderr)
+
+    total_messages = len(cc_messages) + len(cursor_messages) + len(github_messages)
+    if total_messages == 0:
         print("No new entries.")
     elif dry_run:
-        print(f"Would send {len(messages)} message(s):\n")
-        for m in messages:
-            print(m)
-            print("---")
+        print(f"Would send {total_messages} message(s) (see above).")
     else:
-        for m in messages:
-            send_telegram_message(m)
-        print(f"Sent {len(messages)} message(s).")
-
-    if claude_code_entries:
-        state["claude_code"]["last_id"] = claude_code_entries[0][0]
-    if cursor_entries:
-        state["cursor"]["last_link"] = cursor_entries[0][1]
-    if github_entries:
-        state["github"]["last_link"] = github_entries[0][1]
+        print(f"Sent {sent_total}/{total_messages} message(s).")
 
     if not dry_run:
         save_state(state)
+
+    if had_failure:
+        sys.exit(1)
 
 
 if __name__ == "__main__":
