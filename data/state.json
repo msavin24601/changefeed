@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.221"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.222"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/google-workspace-plugins"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-08-03-customize-the-reasoning-level-for-copilot-cloud-agent"
+    "last_link": "https://github.blog/changelog/2026-08-04-customize-code-scanning-default-setup-at-scale"
   }
 }
