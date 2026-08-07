@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.223"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.224"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/google-workspace-plugins"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-08-04-customize-code-scanning-default-setup-at-scale"
+    "last_link": "https://github.blog/changelog/2026-08-06-kimi-k3-is-now-available-in-github-copilot"
   }
 }
