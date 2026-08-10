@@ -2,7 +2,7 @@ name: Changelog digest
 
 on:
   schedule:
-    - cron: "0 8 * * *" # 08:00 UTC daily
+    - cron: "30 6 * * *" # 08:30 Stockholm time (CEST, UTC+2)
   workflow_dispatch: {}
 
 permissions:
