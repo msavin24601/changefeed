@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.232"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.233"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/08-13-26"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-08-13-license-data-quality-improvements"
+    "last_link": "https://github.blog/changelog/2026-08-14-multiple-redirect-uris-and-token-refresh-for-oauth-apps"
   }
 }
