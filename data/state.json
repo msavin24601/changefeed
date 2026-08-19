@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.234"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.235"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/origin-code-hosting"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-08-14-multiple-redirect-uris-and-token-refresh-for-oauth-apps"
+    "last_link": "https://github.blog/changelog/2026-08-18-enterprise-managed-settings-in-github-copilot-for-jetbrains"
   }
 }
