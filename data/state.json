@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.235"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.237"
   },
   "cursor": {
-    "last_link": "https://cursor.com/changelog/origin-code-hosting"
+    "last_link": "https://cursor.com/changelog/08-19-26"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-08-18-enterprise-managed-settings-in-github-copilot-for-jetbrains"
+    "last_link": "https://github.blog/changelog/2026-08-19-codeql-2-26-3-improves-github-actions-queries-and-javascript-modeling"
   }
 }
