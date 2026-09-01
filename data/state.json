@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.251"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.252"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/start-from-scratch"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-08-28-github-copilot-in-visual-studio-august-update-2"
+    "last_link": "https://github.blog/changelog/2026-08-31-github-copilot-in-vs-code-august-2026-releases"
   }
 }
