@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.252"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.258"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/start-from-scratch"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-08-31-github-copilot-in-vs-code-august-2026-releases"
+    "last_link": "https://github.blog/changelog/2026-09-01-enterprise-live-migrations-from-ghes-to-ghe-com-generally-available"
   }
 }
