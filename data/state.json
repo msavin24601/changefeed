@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.258"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.259"
   },
   "cursor": {
-    "last_link": "https://cursor.com/changelog/start-from-scratch"
+    "last_link": "https://cursor.com/changelog/self-hosted-machines"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-09-01-enterprise-live-migrations-from-ghes-to-ghe-com-generally-available"
+    "last_link": "https://github.blog/changelog/2026-09-02-enterprise-managed-settings-support-any-default-model"
   }
 }
