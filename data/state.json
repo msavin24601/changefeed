@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.268"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.269"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/projects"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-09-10-refreshed-repository-pull-requests-page-in-public-preview"
+    "last_link": "https://github.blog/changelog/2026-09-11-add-vs-code-agents-to-copilot-usage-metrics"
   }
 }
