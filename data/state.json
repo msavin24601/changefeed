@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.270"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.272"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/projects"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-09-11-add-vs-code-agents-to-copilot-usage-metrics"
+    "last_link": "https://github.blog/changelog/2026-09-14-configure-cost-and-quality-in-copilot-auto-model-selection"
   }
 }
