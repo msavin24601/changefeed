@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.281"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.282"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/rollouts-and-security-reviewer"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-09-23-copilot-code-review-more-ways-to-request-and-configure-reviews"
+    "last_link": "https://github.blog/changelog/2026-09-25-codeql-2-27-1-adds-c-and-c-query-and-kotlin-2-4-20-support"
   }
 }
