@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.283"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.284"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/rollouts-and-security-reviewer"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-09-25-enterprise-managed-settings-in-product-validator"
+    "last_link": "https://github.blog/changelog/2026-09-28-self-hosted-runner-version-enforcement-date-has-moved"
   }
 }
