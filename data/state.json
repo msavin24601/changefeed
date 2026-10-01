@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.285"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.286"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/rollouts-and-security-reviewer"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-09-29-repository-custom-runner-settings-for-dependabot"
+    "last_link": "https://github.blog/changelog/2026-09-30-opt-in-dist-tag-permissions-for-npm-trusted-publishing"
   }
 }
