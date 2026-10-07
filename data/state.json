@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.291"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.292"
   },
   "cursor": {
-    "last_link": "https://cursor.com/changelog/rollouts-and-security-reviewer"
+    "last_link": "https://cursor.com/changelog/remote-control-local-agents"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-10-06-code-scanning-ai-scan-enablement-status-in-security-overview"
+    "last_link": "https://github.blog/changelog/2026-10-06-update-your-ide-to-restore-agent-activity-in-copilot-usage-metrics"
   }
 }
