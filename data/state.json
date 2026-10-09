@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.294"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.295"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/remote-control-local-agents"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-10-07-claude-haiku-5-5-in-github-copilot"
+    "last_link": "https://github.blog/changelog/2026-10-08-triage-role-users-or-higher-can-now-archive-pull-requests"
   }
 }
