@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.309"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.310"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/cloud-agent-canvases-and-environments"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-10-22-github-copilot-in-visual-studio-september-update-2"
+    "last_link": "https://github.blog/changelog/2026-10-23-usage-metrics-api-adds-usage-from-tools-like-opencode"
   }
 }
