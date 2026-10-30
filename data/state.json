@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.312"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.314"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/agent-sdk"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-10-28-route-and-orchestrate-models-with-github-copilot-fusion"
+    "last_link": "https://github.blog/changelog/2026-10-29-webhook-ip-ranges-added-to-the-meta-api"
   }
 }
