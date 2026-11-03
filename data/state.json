@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.316"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.317"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/agent-sdk"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-11-02-security-risk-assessments-include-repository-protection-status"
+    "last_link": "https://github.blog/changelog/2026-11-03-dependabot-now-supports-python-3-15"
   }
 }
