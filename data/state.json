@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.318"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
   },
   "cursor": {
-    "last_link": "https://cursor.com/changelog/build-live-apps"
+    "last_link": "https://cursor.com/changelog/voice-chat"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-11-05-usage-metrics-api-adds-code-review-details-and-addressed-rate"
+    "last_link": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates"
   }
 }
