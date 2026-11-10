@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.319"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.322"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/voice-chat"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-11-06-copilot-code-review-api-management-and-review-overview-updates"
+    "last_link": "https://github.blog/changelog/2026-11-09-claude-fable-5-2-in-github-copilot"
   }
 }
