@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.329"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/voice-chat"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-11-19-github-desktop-now-supports-multiple-accounts-per-host"
+    "last_link": "https://github.blog/changelog/2026-11-20-security-advisory-permissions-are-now-generally-available"
   }
 }
