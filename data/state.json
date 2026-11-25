@@ -1,11 +1,11 @@
 {
   "claude_code": {
-    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.330"
+    "last_id": "https://github.com/anthropics/claude-code/releases/tag/v2.1.332"
   },
   "cursor": {
     "last_link": "https://cursor.com/changelog/voice-chat"
   },
   "github": {
-    "last_link": "https://github.blog/changelog/2026-11-23-secret-scanning-reduces-false-positives-for-slack"
+    "last_link": "https://github.blog/changelog/2026-11-24-more-predictable-notifications-on-github-com"
   }
 }
